@@ -1,0 +1,217 @@
+.container {
+  position: absolute;
+  left: 1vw;
+  top: 1vh;
+  width: 78%;
+  height: 98%;
+}
+
+.selector {
+  height: 50px;
+  margin-top: 10px;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.calendar {
+  margin-top: 15px;
+  width: 84%;
+  height: 75%;
+  margin-left: 8%;
+}
+.calendar button {
+  width: 80px;
+  height: 80px;
+  border-radius: 7px;
+  border: none;
+}
+
+.td {
+  position: relative;
+  text-align: center;
+  border: none;
+}
+.td button {
+  border: 1px solid rgb(184, 184, 53);
+}
+
+.arrow {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  top: 0%;
+  border: none;
+  background: transparent;
+  font-size: 35px;
+  color: rgb(158, 122, 192);
+}
+
+.selector select {
+  width: 12%;
+  outline: none;
+  border-radius: 8px;
+  padding-left: 5px;
+}
+
+.todo {
+  position: fixed;
+  padding: 20px;
+  width: 40%;
+  left: 30%;
+  top: 5%;
+  z-index: 9999;
+  background: rgb(184, 184, 53);
+  border: 1px solid rgb(184, 184, 53);
+  overflow: hidden;
+  border-radius: 15px;
+  min-height: 50vh;
+}
+
+.todo input {
+  margin: 0 auto;
+  outline: none;
+  border: none;
+}
+
+.todoTitle {
+  font-size: 26px;
+}
+.loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+.closer {
+  position: absolute;
+  font-size: 15px;
+  color: rgb(184, 184, 53);
+  right: -1px;
+  top: -2px;
+  background: white;
+  border: none;
+}
+.form {
+  margin: 14px auto;
+  width: 70%;
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+}
+.form input {
+  outline: none;
+  width: 80%;
+  border-radius: 5px;
+}
+.todoItem {
+  height: auto;
+  width: 98%;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.week {
+  position: relative;
+  border-radius: 10px;
+}
+
+.todoItem label {
+  width: 77%;
+  height: auto;
+
+  flex-shrink: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.changeInput {
+  width: 300px;
+  border-radius: 8px;
+}
+.changeZone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.changeZone input {
+  width: 80%;
+}
+.todoItem input {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+.changer {
+  display: flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  color: rgb(78, 80, 40);
+  background: rgb(255, 255, 255);
+  flex-shrink: 1;
+}
+.todoContent {
+  position: relative;
+  left: 5%;
+  top: 5%;
+
+  height: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.todoContent input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+}
+.empter {
+  margin: 10% auto;
+  font-size: 20px;
+}
+
+@media (max-width: 968px) {
+  .container {
+    padding-left: 10px;
+  }
+  .selector select {
+    width: 20%;
+  }
+  .calendar {
+    width: 98%;
+    margin-left: 1%;
+  }
+  .todo {
+    width: 90vw;
+    left: 2vw;
+  }
+  .form {
+    width: 90%;
+  }
+  .todoItem {
+    font-size: 15px;
+  }
+  .closer {
+    width: 19px;
+    height: 19px;
+  }
+  .calendar button {
+    width: 50px;
+    height: 50px;
+  }
+  .arrow {
+    left: -30%;
+    top: 31%;
+    font-size: 18px;
+  }
+}

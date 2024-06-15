@@ -37,7 +37,7 @@ export async function isDayOff(year: number, month: number, day: number) {
 export function todoReducer(todos: Todo[], action: ActionType): Todo[] {
   switch (action.type) {
     case "init": {
-      return action.payload; 
+      return action.todos;
     }
     case "added": {
       return [
@@ -54,12 +54,12 @@ export function todoReducer(todos: Todo[], action: ActionType): Todo[] {
     }
     case "changed": {
       return todos.map((todo) =>
-        todo.id === action.id ? { ...todo, text: action.content } : todo
+        todo.id === action.id ? { ...todo, text: action.content } : todo,
       );
     }
     case "completed": {
       return todos.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
       );
     }
     default: {

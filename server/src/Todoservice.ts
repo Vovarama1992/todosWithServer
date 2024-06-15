@@ -57,14 +57,20 @@ export class TodoService {
     Object.assign(todo, updateData);
     return this.todoRepository.save(todo);
   }
-  async deleteTodo(id: number): Promise<Todo> {
-    const todo = await this.todoRepository.findOne({ where: { id } });
+  async deleteTodo(
+    id: number,
+  ): Promise<{ todo: Todo | null; message: string }> {
+    try {
+      const todo = await this.todoRepository.findOne({ where: { id } });
+      if (!todo) {
+        return { todo: null, message: `Todo with id ${id} not found` };
+      }
 
-    if (!todo) {
-      throw new Error(`Todo with id ${id} not found`);
+      await this.todoRepository.remove(todo);
+      return { todo, message: `Todo with id ${id} has been deleted` };
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+      throw new Error('Internal server error');
     }
-
-    await this.todoRepository.remove(todo);
-    return todo;
   }
 }

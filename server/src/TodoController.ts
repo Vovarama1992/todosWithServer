@@ -51,7 +51,9 @@ export class TodoController {
     return this.todoService.updateTodo(id, updateData);
   }
   @Delete(':id')
-  async deleteTodo(@Param('id') id: number): Promise<Todo> {
+  async deleteTodo(
+    @Param('id') id: number,
+  ): Promise<{ todo: Todo | null; message: string }> {
     return this.todoService.deleteTodo(id);
   }
 }

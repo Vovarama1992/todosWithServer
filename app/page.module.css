@@ -3,6 +3,7 @@
   left: 1vw;
   top: 1vh;
   width: 78%;
+  
   height: 98%;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .td {
-  position: relative;
+  
   text-align: center;
   border: none;
 }
@@ -59,17 +60,18 @@
 }
 
 .todo {
-  position: fixed;
+  position: absolute;
   padding: 20px;
   width: 40%;
   left: 30%;
+  height: auto;
   top: 5%;
   z-index: 9999;
   background: rgb(184, 184, 53);
   border: 1px solid rgb(184, 184, 53);
-  overflow: hidden;
   border-radius: 15px;
   min-height: 50vh;
+  overflow: visible;
 }
 
 .todo input {
@@ -82,7 +84,7 @@
   font-size: 26px;
 }
 .loading {
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
 }
@@ -109,6 +111,7 @@
 }
 .todoItem {
   height: auto;
+  
   width: 98%;
   padding-bottom: 2px;
   border-bottom: 1px solid black;
@@ -164,7 +167,6 @@
   position: relative;
   left: 5%;
   top: 5%;
-
   height: auto;
   width: 90%;
   display: flex;
@@ -192,8 +194,8 @@
     margin-left: 1%;
   }
   .todo {
-    width: 90vw;
-    left: 2vw;
+    width: 80vw;
+    left: 1vw;
   }
   .form {
     width: 90%;
@@ -210,8 +212,9 @@
     height: 50px;
   }
   .arrow {
-    left: -30%;
-    top: 31%;
+    
+    left: -5%;
+    top: 21%;
     font-size: 18px;
   }
 }

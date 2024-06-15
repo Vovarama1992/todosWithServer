@@ -17,13 +17,14 @@ export default function Home() {
   const [hover, setHover] = useState(false);
   const [day, setDay] = useState(1);
   const [holidays, setHolidays] = useState<number[]>([]);
-  const [weekTasks, setWeekTasks] = useState<Todo[]>([]);
+  const [weekTasks, setWeekTasks] = useState<TodoDto[]>([]);
   const [openWeek, setOpenWeek] = useState(false);
   const [selectedWeek, setSelectedWeek] = useState<number>(0);
   const days = getDays(year, month);
   useEffect(() => {
     const your_name = prompt("Enter your name") || "User";
     setName(your_name.toUpperCase());
+    alert(`hellow, ${your_name}`);
   }, []);
   {
     /*useEffect(() => {
@@ -46,21 +47,19 @@ export default function Home() {
   };
   const onHover = { background: "rgb(184, 184, 53)" };
 
-  function weekHover(weekIndex: number) {
-    if (!open && !openWeek) {
-      setSelectedWeek(weekIndex);
-      setHover(true);
-    }
-  }
-
-  function openModal(e: React.MouseEvent<HTMLButtonElement>, day: number) {
+  function openModal(
+    e: React.MouseEvent<HTMLButtonElement>,
+    day: number,
+    week: number,
+  ) {
     setOpen(true);
     setDay(day);
+    setSelectedWeek(week);
     e.stopPropagation();
   }
   function openWeekModal(weekIndex: number) {
     if (!open) {
-      const tasks: Todo[] = [];
+      const tasks: TodoDto[] = [];
       for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
         const dayNumber = weekIndex * 7 + dayIndex - shift;
         if (dayNumber >= 1 && dayNumber <= days.length) {
@@ -72,7 +71,6 @@ export default function Home() {
           tasks.push(...dayTasks);
         }
       }
-      setWeekTasks(tasks);
 
       setOpenWeek(true);
 
@@ -116,13 +114,7 @@ export default function Home() {
           {Array(Math.ceil((days.length + shift) / 7))
             .fill(null)
             .map((_, weekIndex) => (
-              <tr
-                className={styles.week}
-                onFocus={() => weekHover(weekIndex)}
-                onBlur={() => setHover(false)}
-                style={hover && weekIndex === selectedWeek ? onHover : {}}
-                key={weekIndex}
-              >
+              <tr className={styles.week} key={weekIndex}>
                 {Array(7)
                   .fill(null)
                   .map((_, dayIndex) => {
@@ -161,7 +153,7 @@ export default function Home() {
                             style={hideForModal}
                             className={styles.todoButton}
                             onClick={(e) => {
-                              openModal(e, dayNumber);
+                              openModal(e, dayNumber, weekIndex + 1);
                             }}
                           >
                             <span
@@ -175,7 +167,7 @@ export default function Home() {
                               username={uName}
                               close={() => setOpen(false)}
                               day={day}
-                              week_index={selectedWeek + 1}
+                              week_index={selectedWeek}
                               month={month}
                               year={year}
                             />
@@ -195,7 +187,7 @@ export default function Home() {
           month={month}
           tasks={weekTasks}
           close={() => setOpenWeek(false)}
-          week={selectedWeek}
+          week_index={selectedWeek}
         />
       )}
     </main>

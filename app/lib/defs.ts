@@ -27,10 +27,10 @@ type title = {
 type completed = {
   completed: boolean;
 };
-type day = {
+type Day = {
   day: number;
 };
-type week = {
+type Week = {
   week_of_month: number;
 };
 export type PutDto = (title | completed) & { id: number };
@@ -45,19 +45,28 @@ export type TodoDto = {
   user_name: string;
   completed: boolean;
 };
+export type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
 
 export type CreateDto = {
   message: string;
   todo: TodoDto;
   id: number;
 };
-export type GetTodosByDayParams = {
+type GetTodosByParams = {
   year: number;
   month: number;
 
   user_name: string;
-} & (day | week);
+};
+export type GetTodosByDayParams = GetTodosByParams & Day;
+
+export type GetTodosByWeekParams = GetTodosByParams & Week;
 export type ActionType =
+  | { type: "init"; todos: TodoDto[] }
   | { type: "added"; content: string; id: number }
   | { type: "delete"; id: number }
   | { type: "changed"; id: number; content: string }

@@ -1,12 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TodoDto, PutDto, GetTodosByDayParams } from "./defs";
+import {
+  TodoDto,
+  PutDto,
+  GetTodosByDayParams,
+  GetTodosByWeekParams,
+} from "./defs";
 
 const TODO_TAG = "todos";
 
 export const todosApi = createApi({
   reducerPath: "todosApi",
   tagTypes: [TODO_TAG],
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }), // Установка базового URL
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
   endpoints: (builder) => ({
     getTodosByDay: builder.query<TodoDto[], GetTodosByDayParams>({
       query: ({ year, month, day, user_name }) => ({
@@ -17,7 +22,7 @@ export const todosApi = createApi({
         { type: TODO_TAG, id: `${year}-${month}-${day}-${user_name}` },
       ],
     }),
-    getTodosByWeek: builder.query<TodoDto[], GetTodosByDayParams>({
+    getTodosByWeek: builder.query<TodoDto[], GetTodosByWeekParams>({
       query: ({ year, month, week_of_month, user_name }) => ({
         url: `/todos/by-week`,
         params: { year, month, week_of_month, user_name },
@@ -74,21 +79,24 @@ export const todosApi = createApi({
             ]
           : [],
     }),
-    deleteTodo: builder.mutation<TodoDto, { id: number }>({
-      query: (id) => ({
+    deleteTodo: builder.mutation<
+      { todo: TodoDto | null; message: string },
+      { id: number }
+    >({
+      query: ({ id }) => ({
         url: `/todos/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error) =>
-        !error && result
+        !error && result && result.todo
           ? [
               {
                 type: TODO_TAG,
-                id: `${result.year}-${result.month}-${result.day}-${result.user_name}`,
+                id: `${result.todo.year}-${result.todo.month}-${result.todo.day}-${result.todo.user_name}`,
               },
               {
                 type: TODO_TAG,
-                id: `${result.year}-${result.month}-W${result.week_of_month}-${result.user_name}`,
+                id: `${result.todo.year}-${result.todo.month}-W${result.todo.week_of_month}-${result.todo.user_name}`,
               },
             ]
           : [],
